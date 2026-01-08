@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kokila Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+/>
+
+<style>
+    /* Reset & Base */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    body { background-color: #F3F4F6; color: #111827; line-height: 1.6; scroll-behavior: smooth; }
+
+    /* Buttons */
+    .btn-primary {
+      display: inline-block;
+      background-color: #F97316;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+      animation: fadeInUp 0.8s forwards;
+    }
+    .btn-primary:hover { background-color: #EA580C; transform: translateY(-2px); }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 50vh;
+      background: url('kokila.jpeg') center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(30, 58, 138, 0.7);
+    }
+    .hero-content {
+      position: relative;
+      color: #fff;
+      z-index: 2;
+      animation: fadeInUp 1.5s ease forwards;
+    }
+    .hero h1 { font-size: 3rem; margin-bottom: 1rem; letter-spacing: 1px; animation: fadeInUp 1s forwards; }
+    .hero p { font-size: 1.25rem; margin-bottom: 2rem; color: #E0E0E0; animation: fadeInUp 1.2s forwards; }
+
+    /* Sections */
+    .section { padding: 3rem 1.5rem; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .section h2 { color: #1E3A8A; font-size: 2rem; margin-bottom: 2rem; text-align: center; position: relative; animation: fadeInUp 1s forwards; }
+
+    /* Cards */
+    .cards { 
+      display: grid; 
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem; 
+    }
+
+    .card {
+      background-color: #FFFFFF;
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s forwards;
+    }
+    .card:nth-child(1){ animation-delay: 0.2s; }
+    .card:nth-child(2){ animation-delay: 0.4s; }
+    .card:nth-child(3){ animation-delay: 0.6s; }
+    .card:nth-child(4){ animation-delay: 0.8s; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.15); }
+
+    .card h3 { color: #1E3A8A; margin-bottom: 0.5rem; font-size: 1.25rem; animation: fadeInUp 0.8s forwards; }
+    .card h4 { color: #6B7280; margin-bottom: 1rem; font-weight: 500; font-size: 0.95rem; animation: fadeInUp 1s forwards; }
+    .card ul { list-style: disc; margin-left: 1.5rem; color: #111827; font-size: 0.95rem; animation: fadeInUp 1.2s forwards; }
+    .card p { font-size: 0.95rem; color: #4B5563; animation: fadeInUp 1.4s forwards; }
+
+    /* Projects section – force 3 columns in one row */
+    .projects .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      max-width: 1500px;   
+      margin: 0 auto;
+      gap: 2rem;
+    }
+
+    /* Responsive handling */
+    @media (max-width: 1024px) {
+      .projects .cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .projects .cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .container {
+      max-width: 1400px;
+    }
+
+    .project-image {
+      width: 100%;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      border-radius: 0.75rem;
+    }
+
+    .project-image img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .card:hover .project-image img {
+      transform: scale(1.08);
+    }
+
+    /* Smart Irrigation – Green */
+    .card.irrigation .project-icon {
+      background: rgba(34, 197, 94, 0.15);
+      color: #22C55E;
+      animation: fadeInUp 0.8s forwards;
+    }
+    .card.irrigation:hover .project-icon {
+      background: #22C55E;
+      color: #fff;
+    }
+
+    /* Rover – Blue */
+    .card.rover .project-icon {
+      background: rgba(59, 130, 246, 0.15);
+      color: #3B82F6;
+      animation: fadeInUp 0.8s forwards;
+    }
+    .card.rover:hover .project-icon {
+      background: #3B82F6;
+      color: #fff;
+    }
+
+    /* Arm Robot – Purple */
+    .card.arm .project-icon {
+      background: rgba(168, 85, 247, 0.15);
+      color: #A855F7;
+      animation: fadeInUp 0.8s forwards;
+    }
+    .card.arm:hover .project-icon {
+      background: #A855F7;
+      color: #fff;
+    }
+
+    /* Skills */
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      justify-content: center;
+      list-style: none;
+      margin-top: 1rem;
+    }
+
+    .skills-list li {
+      background: #1E3A8A;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-weight: 500;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeInUp 0.8s forwards;
+    }
+
+    .skills-list li:nth-child(1){ animation-delay: 0.2s; }
+    .skills-list li:nth-child(2){ animation-delay: 0.4s; }
+    .skills-list li:nth-child(3){ animation-delay: 0.6s; }
+    .skills-list li:nth-child(4){ animation-delay: 0.8s; }
+
+    /* Contact */
+    .contact { text-align: center; }
+    .contact p { margin: 0.5rem 0; font-size: 1rem; animation: fadeInUp 0.8s forwards; }
+    .contact a { color: #F97316; font-weight: 500; transition: all 0.3s; animation: fadeInUp 1s forwards; }
+    .contact a:hover { color: #EA580C; text-decoration: underline; transform: translateY(-2px); }
+
+    .contact-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap; 
+      animation: fadeInUp 1.2s forwards;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px){
+      .hero h1 { font-size: 2.2rem; }
+      .hero p { font-size: 1rem; }
+    }
+</style>
+
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>MS. Kokila</h1>
+      <p>STEM & Robotics Trainer</p>
+      <a href="#contact" class="btn-primary">Contact Me</a>
+    </div>
+  </header>
+
+  <!-- About Section -->
+  <section class="section about" id="about">
+    <div class="container">
+      <h2>Professional Summary</h2>
+      <p>
+      <b> STEM & Robotics Trainer with 3+ years of experience</b> delivering hands-on robotics and coding across schools and CSR programs. Skilled in <b>Arduino, sensors, IoT, 3D 
+printing, VR</b>, and project-based learning aligned with <b>NEP 2020</b> and experiential learning 
+frameworks. Proven track record in <b>teacher training, student project 
+mentoring</b> , and managing end-to-end STEM labs. Adept at simplifying complex concepts and 
+delivering engaging sessions that improve student learning outcomes.
+      </p>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section class="section experience" id="experience">
+    <div class="container">
+      <h2>Experience</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>
+  <i class="fa-solid fa-robot" style="color: #F97316; margin-right: 0.5rem;"></i>
+  STEM Robotics Engineer
+</h3>
+
+          <h4>iSpark Learning Solutions, Chennai | May 2025 – Present</h4>
+          <ul>
+           <ul>
+  <li>Deliver hands-on STEM and robotics sessions using Arduino, NodeMCU, sensors, and coding platforms to students across grade levels.</li>
+  <li>Design structured school and college-level robotics curriculum aligned with real-world applications and NEP 2020 guidelines.</li>
+  <li>Mentor students on robotics projects such as line followers, IoT systems, and sensor-based robots, improving innovation and problem-solving skills.</li>
+  <li>Conduct teacher training programs enabling educators to confidently deliver STEM modules independently.</li>
+  <li>Organize workshops, competitions, and project-based learning activities increasing student engagement by 40%.</li>
+  <li>Provide technical support, troubleshoot robotics kits, and maintain lab infrastructure.</li>
+</ul>
+          </ul>
+        </div>
+
+        <div class="card">
+         <h3>
+  <i class="fa-solid fa-handshake-angle" style="color: #3B82F6; margin-right: 0.5rem;"></i>
+  CSR STEM Trainer
+</h3>
+          <h4>Robospecies, Chennai | Jan 2025 – May 2025</h4>
+         <ul>
+  <li>Delivered CSR-based STEM education covering Robotics, STEAM, VR, 3D Printing, Drones, & IoT across multiple government schools.</li>
+  <li>Facilitated hands-on practical workshops and annual/summer camps for 45+ students per batch.</li>
+  <li>Developed and submitted detailed monthly and quarterly reports on learning outcomes and student progress to CSR partners.</li>
+  <li>Conducted faculty development sessions to train teachers in basic robotics and emerging technologies.</li>
+</ul>
+        </div>
+
+        <div class="card">
+          <h3>
+  <i class="fa-solid fa-chalkboard-user" style="color: #A855F7; margin-right: 0.5rem;"></i>
+  Robotics Trainer
+</h3>
+          <h4>DIYA Robotics, Chennai | Nov 2023 – Jan 2025</h4>
+          <ul>
+  <li>Delivered personalized mentoring in robotics, coding (Scratch, Arduino), and STEM concepts.</li>
+  <li>Conducted assessments and provided data-driven feedback to enhance project quality.</li>
+  <li>Coordinated technical events, competitions, and workshops to promote student interest.</li>
+  <li>Built collaborations with external STEM professionals for exposure programs.</li>
+</ul>
+        </div>
+        <div class="card">
+          <h3>
+  <i class="fa-solid fa-flask" style="color: #22C55E; margin-right: 0.5rem;"></i>
+  Research Analyst & Robotics Trainer
+</h3>
+          <h4>Cyberbots Learning Solution | Apr 2023 – Nov 2024</h4>
+          <ul>
+  <li>Designed comprehensive robotics curriculum for primary to higher secondary students.</li>
+  <li>Conducted hands-on classes on robotics building, sensor integration, and Arduino programming.</li>
+  <li>Customized modules based on student learning levels and performance analytics.</li>
+  <li>Ensured lab safety and maintained robotics equipment.</li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+<section class="section projects" id="projects">
+  <div class="container">
+    <h2>Projects</h2>
+    <div class="cards">
+
+<div class="card spider">
+  <!-- Robot Image -->
+  <div class="project-image">
+    <img src="robot1.jpeg" alt="Spider Robot Obstacle Avoidance">
+  </div>
+
+  <h3>Spider Robot – Obstacle Avoidance</h3>
+  <ul>
+    <li>Built a 4-legged spider robot that mimics insect-like movement.</li>
+    <li>Implemented obstacle avoidance behavior using an ultrasonic sensor.</li>
+    <li>Programmed coordinated leg movements for stable crawling and turning.</li>
+    <li>Focused on autonomous navigation and real-time decision making.</li>
+    <li>Demonstrates understanding of robot locomotion and autonomous robotics.</li>
+  </ul>
+</div>
+
+
+
+<div class="card dog">
+  <!-- Robot Image -->
+  <div class="project-image">
+    <img src="robot2.jpeg" alt="Dog Robot Intelligent Walking Robot">
+  </div>
+  <h3>Dog Robot – Intelligent Walking Robot</h3>
+  <ul>
+    <li>Developed a 4-legged dog robot capable of walking, sensing, sitting, and dancing.</li>
+    <li>Used servo motors for realistic leg movement, balance, and posture control.</li>
+    <li>Integrated a web server interface for live control of robot actions and movements.</li>
+    <li>Implemented ultrasonic sensor-based reactions to respond to nearby objects.</li>
+    <li>Designed movement gaits for smooth and stable motion.</li>
+    <li>Demonstrates advanced skills in kinematics, gait planning, and sensor integration.</li>
+  </ul>
+</div>
+
+
+<div class="card rover">
+  <!-- Robot Image -->
+  <div class="project-image">
+    <img src="robot.jpeg" alt="6-Wheel Mars Rover Robot">
+  </div>
+
+  <h3>Mars Rover – Web-Controlled Robot</h3>
+  <ul>
+    <li>Designed and built a 6-wheel Mars Rover using DC motors.</li>
+    <li>Controlled via a web server application enabling real-time directional movement.</li>
+    <li>Implemented forward, backward, left, right, and stop controls through a browser-based interface.</li>
+    <li>Focused on robot mobility, motor synchronization, and remote-control concepts.</li>
+    <li>Demonstrated IoT-based robotics and web-controlled system principles.</li>
+  </ul>
+</div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Skills Section -->
+  <section class="section skills" id="skills">
+      <div class="container">
+    <h2>Technical Skills</h2>
+    <ul class="skills-list">
+      <li><i class="fa-solid fa-microchip"></i>Robotics Platforms:Arduino Uno, Nano, NodeMCU (ESP8266)</li>
+      <li><i class="fa-solid fa-code"></i>Programming:Arduino IDE, Python (Basic), Scratch, Web Development (HTML/CSS/JS)</li>
+      <li><i class="fa-solid fa-robot"></i> Technologies:IoT Systems, VR Tools, 3D Printing (TinkerCAD), Sensors</li>
+      <li><i class="fa-solid fa-laptop-code"></i> Tools:MS Office, MATLAB, SPSS</li>
+    </ul>
+  </div>
+  </section>
+
+  <!-- Contact Section -->
+<section class="section contact" id="contact">
+  <div class="container">
+    <h2>Contact Me</h2>
+
+    <div class="contact-row">
+      <p class="contact-item">
+        <i class="fa-solid fa-envelope"></i>
+        <a href="mailto:kokilashri279@gmail.com">kokilashri279@gmail.com</a>
+      </p>
+
+      <p class="contact-item">
+        <i class="fa-solid fa-phone"></i>
+        <span>9994375199</span>
+      </p>
+
+      <p class="contact-item">
+        <i class="fa-brands fa-linkedin"></i>
+        <a href="https://www.linkedin.com/in/kokila-koki-b249a5235/" target="_blank">
+          LinkedIn
+        </a>
+      </p>
+    </div>
+  </div>
+</section>
+
+
+
+   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+</body>
+</html>
